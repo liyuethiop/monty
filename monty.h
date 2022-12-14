@@ -43,6 +43,9 @@ typedef struct instruction_s
 
 int isnum(char *s);
 
+int check_valid_instruc(char *s, unsigned int line_number, char *buf);
+void file_open_status(int fd, char *argv[]);
+void check_arguments(int argc);
 
 void push(stack_t **stack, int line_num);
 
