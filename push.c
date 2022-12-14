@@ -15,12 +15,12 @@ void push(stack_t **stack, unsigned int line_num)
 		return;
 	}
 	new = malloc(sizeof(stack_t));
-	/**if (!new)
+	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		clear_stack(stack);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
-	}**/
+	}
 
 	arg = strtok(NULL, " ");
 	status = isnum(arg);
