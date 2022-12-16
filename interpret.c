@@ -1,35 +1,35 @@
 #include "monty.h"
-
 /**
-* tokenize - Function that parse the information of the file.
-* @line: The info to tokenize.
-* Return: The list of tokens.
-*/
-char **tokenize(char *line)
+ * interpret_command - interprets a string to see if it's a
+ *
+ * @buf: buffer storing line
+ * @line_number: line number in bytecode instruction
+ * @fd: file descriptor
+ * @fpointer: file pointer
+ */
+void interpret_command(char *buf, unsigned int line_number,
+		       int fd, FILE *fpointer)
 {
-	char **instructions = NULL, del[7] = " \t\r\n\a";
-	char *token = NULL;
-	int i = 0;
+	char *token;
+	int status;
 
-	instructions = malloc(sizeof(char *) * 2);
-	if (!instructions)
+	token = strtok(buf, " \t\n");
+	if (token == NULL || *token == '#')
+		return;
+	status = check_valid_instruc(token, line_number, buf);
+	if (status == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		close(fd);
+		fclose(fpointer);
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, del); /* no olvidar tab y los demas sep */
-	if (token == NULL)
-	{
-		free(instructions);
-		return (NULL);
-	}
 	if (strcmp(token, "push") == 0)
-		instructions[1] = NULL;
-	while (i < 2)
 	{
-		instructions[i] = token;
-		token = strtok(NULL, del);
-		i++;
+		push(&stack, line_number);
 	}
-	return (instructions);
+	/**else
+	*{
+	*	get_op(token)(&stack, line_number);
+	*}
+	*/
 }

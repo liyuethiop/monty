@@ -4,13 +4,13 @@
  * @stack: pointer of the stack
  * @line_num: number assigned to stack element
  */
-void push(stack_t **stack, unsigned int line_num)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 	char *arg;
 	int status;
 
-	if (!stack)
+	if (!*stack)
 	{
 		return;
 	}
@@ -26,7 +26,7 @@ void push(stack_t **stack, unsigned int line_num)
 	status = isnum(arg);
 	if (status == -1)
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_num);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	else

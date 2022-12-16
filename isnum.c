@@ -6,8 +6,9 @@
  */
 int isnum(char *s)
 {
-	int i;
+	size_t i;
 
+	i = 0;
 	if (!s)
 	{
 		return (-1);
@@ -21,7 +22,7 @@ int isnum(char *s)
 	{
 		return (-1);
 	}
-	for (i = 0; i < strlen(s); i++)
+	for (; i < strlen(s); i++)
 	{
 		if (s[i] < '0' || s[i] > '9')
 			return (-1);

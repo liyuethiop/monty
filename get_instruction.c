@@ -1,30 +1,29 @@
 #include "monty.h"
 
 /**
- * get_instruct - function reads command string and selects
+ * get_op - function reads command string and selects
  * the correct function to perform
  * @s: string
  *
  * Return: pointer corresponding function
  */
-void get_instruct(char *s, stack_t **stack, unsigned int line_number)
+void get_op(char *op, stack_t **stack, unsigned int line_number)
 {
-	instruction_t ops[] = {
-		{"pall", pall},
+	size_t i;
+	instruction_t valid_ops[] = {
 		{"push", push},
+		{"pall", pall},
+		{"pop", pop},
 		{NULL, NULL}
 	};
-	int i;
 
-	i = 0;
-
-	while (ops[i].opcode != NULL)
+	for (i = 0; valid_ops[i].opcode != NULL; i++)
 	{
-		if (strcmp(s, ops[i].opcode) == 0)
+		if (strcmp(valid_ops[i].opcode, op) == 0)
 		{
-			ops[i].f(stack, line_number);
+			valid_ops[i].f(stack, line_number);
+			return;
 		}
-		i++;
 	}
-	exit(-1);
+	exit(EXIT_FAILURE);
 }

@@ -6,20 +6,6 @@
  */
 void free_stack(stack_t **h)
 {
-	if (!*h)
-		return;
-	stack_t *temp;
-
-	if ((*h)->next)
-	{
-		temp = (*h)->next;
-		free(*h);
-		*h = temp;
-		(*h)->prev = NULL;
-	}
-	else
-	{
-		free(*h);
-		*h = NULL;
-	}
+	while (*h)
+		simple_pop(h);
 }
