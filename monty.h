@@ -49,7 +49,7 @@ int check_valid_instruc(char *s, unsigned int line_number, char *buf);
 void file_open_status(int fd, char *argv[]);
 void check_arguments(int argc);
 
-void (*get_instruct(char *s))(stack_t **stack, unsigned int line_number);
+void get_instruct(char *s, stack_t **stack, unsigned int line_number);
 
 void interpret(char *buf, unsigned int line_number,
 		       int fd, FILE *fpointer);

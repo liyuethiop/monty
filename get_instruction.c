@@ -7,18 +7,11 @@
  *
  * Return: pointer corresponding function
  */
-void (*get_instruct(char *s))(stack_t **stack, unsigned int line_number)
+void get_instruct(char *s, stack_t **stack, unsigned int line_number)
 {
 	instruction_t ops[] = {
 		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"div", _div},
-		{"mul", _mul},
+		{"push", push},
 		{NULL, NULL}
 	};
 	int i;
@@ -29,7 +22,7 @@ void (*get_instruct(char *s))(stack_t **stack, unsigned int line_number)
 	{
 		if (strcmp(s, ops[i].opcode) == 0)
 		{
-			return (ops[i].f);
+			ops[i].f(stack, line_number);
 		}
 		i++;
 	}
