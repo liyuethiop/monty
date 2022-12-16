@@ -4,14 +4,22 @@
  * free_stack - clears stack into double linked list
  * @h: pointer to top of stack
  */
-void free_stack(stack_t *h)
+void free_stack(stack_t **h)
 {
-	if (!h)
+	if (!*h)
 		return;
-	while (h->next)
+	stack_t *temp;
+
+	if ((*h)->next)
 	{
-		h = h->next;
-		free(h->prev);
+		temp = (*h)->next;
+		free(*h);
+		*h = temp;
+		(*h)->prev = NULL;
 	}
-	free(h)
+	else
+	{
+		free(*h);
+		*h = NULL;
+	}
 }

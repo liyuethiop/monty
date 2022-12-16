@@ -54,7 +54,7 @@ void (*get_instruct(char *s))(stack_t **stack, unsigned int line_number);
 void interpret(char *buf, unsigned int line_number,
 		       int fd, FILE *fpointer);
 
-void free_stack(stack_t *h)
+void free_stack(stack_t **h);
 
 
 void push(stack_t **stack, int line_num);
