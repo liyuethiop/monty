@@ -52,6 +52,6 @@ int check_valid_instruc(char *s, unsigned int line_number, char *buf)
 	fprintf(stderr, "L%u: unknown instruction %s\n",
 		line_number, s);
 	free(buf);
-	//clear_stack(&stack);
+	free_stack(&stack);
 	return (-1);
 }
